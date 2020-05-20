@@ -1,14 +1,14 @@
 # PkcsExtensions.Blazor
- Add extensions for Blazor and light [WebCrypto](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) interop.
+ Add crypto and digital signature functionality for Blazor and light [WebCrypto](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) interop.
 
- ### Features
+ ## Features
  - Namespace **PkcsExtensions.Blazor**:
    - `IWebCryptoProvider` - provide generate random numbers, generate RSA and ECDSA (as JsonWebKey) key pairs
    - `IEcWebCryptoProvider` - provide methods `GetSharedDhmSecret` for derive bytes using _Diffie Hellman Merkle_ and `GetSharedEphemeralDhmSecret` for ECIES scheme.
 - Namespace **PkcsExtenions.Blazor.Jwk** - implementation of __JsonWebKey__
 - Namespace **PkcsExtenions.Blazor.Security** - extensions for [System.Security.Cryptography](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netstandard-2.1)
 
-### Usage
+## Usage
 Install package `dotnet add package PkcsExtensions.Blazor` to Blazor WebAssebmly project.
 
 Add to _index.html_:
@@ -33,11 +33,14 @@ And register services in _Main_ method:
         }
     }
 ```
-### Examples
+## Examples
 
 See [other examples](Examples/BlazorWebAssemblyExamples.md).
 
-### Recommendations
+## Recommendations
 - Avoid use WebCyrpto for hashing, HMAC-ing, encryption, because their implementations has differs between browsers and operating systems. Use _.Net_ implementation.
 - Hint: Consider using high performance elliptic curves [Curve25519](https://en.wikipedia.org/wiki/Curve25519),
 [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519) or similar. Use full managed implementation e.g. [Chaos.NaCl library](https://github.com/CodesInChaos/Chaos.NaCl).
+
+## See
+1. [PkcsExtensions](https://github.com/harrison314/PkcsExtensions)
