@@ -2,25 +2,30 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>1.0.0.0</Version>
     <RazorLangVersion>3.0</RazorLangVersion>
+    <Title>PKCS Extensions Blazor</Title>
     <Authors>harrison314</Authors>
     <Product>PkcsExtenions</Product>
     <Copyright>harrison314</Copyright>
-    <PackageProjectUrl>https://github.com/harrison314/PkcsExtensions</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/harrison314/PkcsExtensions.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/harrison314/PkcsExtenions.Blazor</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/harrison314/PkcsExtenions.Blazor.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>PKI, PKCS, X509Certificate2, Blazor, WebCrypto, RSA</PackageTags>
-    <Description>PKCS Extensions for Blazor, include light interop to WebCrypto.</Description>
+    <Description>PKCS Extensions for Blazor WebAssembly, include light interop to WebCrypto.</Description>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="PkcsExtenions" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.4" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="PkcsExtenions" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
