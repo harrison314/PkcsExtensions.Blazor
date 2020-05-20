@@ -33,6 +33,9 @@ And register services in _Main_ method:
         }
     }
 ```
+### Examples
+
+See [other examples](Examples/BlazorWebAssemblyExamples.md).
 
 ### Recommendations
 - Avoid use WebCyrpto for hashing, HMAC-ing, encryption, because their implementations has differs between browsers and operating systems. Use _.Net_ implementation.
