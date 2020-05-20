@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <Authors>harrison314</Authors>
+    <Product>PkcsExtenions</Product>
+    <Copyright>harrison314</Copyright>
+    <PackageProjectUrl>https://github.com/harrison314/PkcsExtensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/harrison314/PkcsExtensions.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>PKI, PKCS, X509Certificate2, Blazor, WebCrypto, RSA</PackageTags>
+    <Description>PKCS Extensions for Blazor, include light interop to WebCrypto.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.3" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.8.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="PkcsExtenions" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="tsconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <Pack>false</Pack>
+    </Content>
+
+    <Content Update="**/*.ts">
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
