@@ -42,5 +42,6 @@ See [other examples](Examples/BlazorWebAssemblyExamples.md).
 - Hint: Consider using high performance elliptic curves [Curve25519](https://en.wikipedia.org/wiki/Curve25519),
 [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519) or similar. Use full managed implementation e.g. [Chaos.NaCl library](https://github.com/CodesInChaos/Chaos.NaCl).
 
-## See
+## Read more
 1. [PkcsExtensions](https://github.com/harrison314/PkcsExtensions)
+1. [WebCrypto support in browsers](https://diafygi.github.io/webcrypto-examples/)
