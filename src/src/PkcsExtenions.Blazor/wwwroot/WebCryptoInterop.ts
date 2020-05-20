@@ -105,7 +105,7 @@ namespace PkcsExtensionsBlazor {
         };
 
         return crypto.subtle.generateKey(ecdsaParams, true, ['sign', 'verify'])
-            .then(t => crypto.subtle.exportKey('jwk', t.privateKey))
+            .then((t: CryptoKeyPair) => crypto.subtle.exportKey('jwk', t.privateKey))
             .then(t => mapEcJwk(t));
     };
 
@@ -118,7 +118,7 @@ namespace PkcsExtensionsBlazor {
         };
 
         let publicKeyPromise = window.crypto.subtle.importKey('jwk', sanilizeEcJwk(publicKey), importParams, true, ['deriveBits']);
-        let keyPairPromise = window.crypto.subtle.generateKey(importParams, true, ['deriveBits']);
+        let keyPairPromise = window.crypto.subtle.generateKey(importParams, true, ['deriveBits']) as PromiseLike<CryptoKeyPair>;
 
         return unpromise({
             otherPublicKey: publicKeyPromise,
