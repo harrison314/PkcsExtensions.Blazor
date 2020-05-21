@@ -45,7 +45,7 @@ Task("Clean")
           CleanDirectory(artefacts);
      });
 
-Task("Build-PKCSExtensuionsBlazor")
+Task("Build-PkcsExtensionsBlazor")
     .IsDependentOn("Clean")
     .Does(() =>
     {
@@ -60,12 +60,12 @@ Task("Build-PKCSExtensuionsBlazor")
         };
 
         UpdateSettings(settings);
-        DotNetCorePack("../src/src/PkcsExtenions.Blazor/PkcsExtenions.Blazor.csproj", settings);
+        DotNetCorePack("../src/src/PkcsExtensions.Blazor/PkcsExtensions.Blazor.csproj", settings);
     });
 
 // ****************************************************************************
 
-Task("Test-PKCSExtensuionsBlazor")
+Task("Test-PkcsExtensionsBlazor")
     .IsDependentOn("Clean")
     .Does(() =>
     {
@@ -74,18 +74,19 @@ Task("Test-PKCSExtensuionsBlazor")
             Configuration = configuration
         };
 
-        DotNetCoreTest("../src/test/PkcsExtenions.Blazor.Tests/PkcsExtenions.Blazor.Tests.csproj", settings);
+        DotNetCoreTest("../src/test/PkcsExtensions.Blazor.Tests/PkcsExtensions.Blazor.Tests.csproj", settings);
     });
 
 // ****************************************************************************
 
 Task("Test")
-    .IsDependentOn("Test-PKCSExtensuionsBlazor");
+    .IsDependentOn("Test-PkcsExtensionsBlazor");
 
 Task("Build")
-    .IsDependentOn("Build-PKCSExtensuionsBlazor");
+    .IsDependentOn("Build-PkcsExtensionsBlazor");
 
 Task("Default")
+    .IsDependentOn("Test-PkcsExtensionsBlazor")
     .IsDependentOn("Build");
 
 //*****************************************************************************
