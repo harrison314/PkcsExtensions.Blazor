@@ -1,4 +1,6 @@
 # PkcsExtensions.Blazor
+[![NuGet Status](http://img.shields.io/nuget/v/PkcsExtensions.Blazor.svg?style=flat)](https://www.nuget.org/packages/PkcsExtensions.Blazor/)
+
  Add crypto and digital signature functionality for Blazor and light [WebCrypto](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) interop.
 
  ## Features
