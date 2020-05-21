@@ -31,9 +31,8 @@ Examples using WebCrypto interop.
 @using PkcsExtensions.Blazor.Security
 @inject PkcsExtensions.Blazor.IWebCryptoProvider wcProvider
 
-<div>
-    @data
-</div>
+<pre>@data</pre>
+
 <div>
     <button @onclick="GenerateRsa">Generate</button>
 </div>
@@ -87,8 +86,8 @@ Examples using WebCrypto interop.
 @inject IEcWebCryptoProvider ecProvider
 
 <div>
-    <p>Alice: @data</p>
-    <p>Bob: @data</p>
+    <p>Alice: @aliceSecret</p>
+    <p>Bob: @bobSecret</p>
 </div>
 <div>
     <button @onclick="Generate">Generate</button>
@@ -102,7 +101,7 @@ Examples using WebCrypto interop.
     private async Task Generate()
     {
         JsonWebKey alicePrivateKey = await wcProvider.GenerateECDsaJwkKeyPair(WebCryptoCurveName.NistP521);
-        JsonWebKey alicePublicKey = alicePrivateKey.AsPrivateKey();
+        JsonWebKey alicePublicKey = alicePrivateKey.AsPublicKey();
 
         JsonWebKey bobPrivateKey = await wcProvider.GenerateECDsaJwkKeyPair(WebCryptoCurveName.NistP521);
         JsonWebKey bobPublicKey = bobPrivateKey.AsPublicKey();
