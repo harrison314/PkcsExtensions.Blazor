@@ -5,15 +5,15 @@
  - Namespace **PkcsExtensions.Blazor**:
    - `IWebCryptoProvider` - provide generate random numbers, generate RSA and ECDSA (as JsonWebKey) key pairs
    - `IEcWebCryptoProvider` - provide methods `GetSharedDhmSecret` for derive bytes using _Diffie Hellman Merkle_ and `GetSharedEphemeralDhmSecret` for ECIES scheme.
-- Namespace **PkcsExtenions.Blazor.Jwk** - implementation of __JsonWebKey__
-- Namespace **PkcsExtenions.Blazor.Security** - extensions for [System.Security.Cryptography](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netstandard-2.1)
+- Namespace **PkcsExtensions.Blazor.Jwk** - implementation of __JsonWebKey__
+- Namespace **PkcsExtensions.Blazor.Security** - extensions for [System.Security.Cryptography](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netstandard-2.1)
 
 ## Usage
 Install package `dotnet add package PkcsExtensions.Blazor` to Blazor WebAssebmly project.
 
 Add to _index.html_:
 ```html
-<script src="_content/PkcsExtenions.Blazor/WebCryptoInterop.js"></script>
+<script src="_content/PkcsExtensions.Blazor/WebCryptoInterop.js"></script>
 ```
 
 And register services in _Main_ method:

@@ -3,7 +3,7 @@ Examples using WebCrypto interop.
 
 ## Generate random byte array
 ```cs
-@inject PkcsExtenions.Blazor.IWebCryptoProvider wcProvider
+@inject PkcsExtensions.Blazor.IWebCryptoProvider wcProvider
 
 <div>
     <p>@dataAsBase64</p>
@@ -27,9 +27,9 @@ Examples using WebCrypto interop.
 ## Generate RSA keys
 ```cs
 @using System.Security.Cryptography
-@using PkcsExtenions
-@using PkcsExtenions.Blazor.Security
-@inject PkcsExtenions.Blazor.IWebCryptoProvider wcProvider
+@using PkcsExtensions
+@using PkcsExtensions.Blazor.Security
+@inject PkcsExtensions.Blazor.IWebCryptoProvider wcProvider
 
 <div>
     @data
@@ -53,9 +53,9 @@ Examples using WebCrypto interop.
 ## Generate EC keys as JWK
 ```cs
 @using System.Security.Cryptography
-@using PkcsExtenions
-@using PkcsExtenions.Blazor.Jwk
-@using PkcsExtenions.Blazor
+@using PkcsExtensions
+@using PkcsExtensions.Blazor.Jwk
+@using PkcsExtensions.Blazor
 @inject IWebCryptoProvider wcProvider
 
 <div>
@@ -80,9 +80,9 @@ Examples using WebCrypto interop.
 ## Key exange using EC DHM
 ```cs
 @using System.Security.Cryptography
-@using PkcsExtenions
-@using PkcsExtenions.Blazor.Jwk
-@using PkcsExtenions.Blazor
+@using PkcsExtensions
+@using PkcsExtensions.Blazor.Jwk
+@using PkcsExtensions.Blazor
 @inject IWebCryptoProvider wcProvider
 @inject IEcWebCryptoProvider ecProvider
 
@@ -119,9 +119,9 @@ Examples using WebCrypto interop.
 ## Using ECIES scheme
 ```cs
 @using System.Security.Cryptography
-@using PkcsExtenions
-@using PkcsExtenions.Blazor.Jwk
-@using PkcsExtenions.Blazor
+@using PkcsExtensions
+@using PkcsExtensions.Blazor.Jwk
+@using PkcsExtensions.Blazor
 @inject IWebCryptoProvider wcProvider
 @inject IEcWebCryptoProvider ecProvider
 
