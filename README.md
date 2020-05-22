@@ -41,6 +41,7 @@ See [other examples](Examples/BlazorWebAssemblyExamples.md).
 
 ## Recommendations
 - Avoid use WebCyrpto for hashing, HMAC-ing, encryption, because their implementations has differs between browsers and operating systems. Use _.Net_ implementation.
+- Avoid use WebCrypto for signing because it does not support hash signing.
 - Hint: Consider using high performance elliptic curves [Curve25519](https://en.wikipedia.org/wiki/Curve25519),
 [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519) or similar. Use full managed implementation e.g. [Chaos.NaCl library](https://github.com/CodesInChaos/Chaos.NaCl).
 
