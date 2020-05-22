@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/harrison314/PkcsExtensions.Blazor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/harrison314/PkcsExtensions.Blazor.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>PKI, PKCS, X509Certificate2, Blazor, WebCrypto, RSA</PackageTags>
+    <PackageTags>PKI, PKCS, X509Certificate2, Blazor, BlazorWebAssembly, WebCrypto, RSA</PackageTags>
     <Description>PKCS Extensions for Blazor WebAssembly, include light interop to WebCrypto.</Description>
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <AssemblyVersion>$(Version)</AssemblyVersion>
