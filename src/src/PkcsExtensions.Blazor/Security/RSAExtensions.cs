@@ -29,6 +29,16 @@ namespace PkcsExtensions.Blazor.Security
             return writer.Encode();
         }
 
+        public static byte[] ManagedExportPkcs8PrivateKey(this RSA rsa, AsnFormat format)
+        {
+            return format switch
+            {
+                AsnFormat.Der => rsa.ManagedExportPkcs8PrivateKey(),
+                AsnFormat.Pem => PemFormater.ToPemBytes(rsa.ManagedExportPkcs8PrivateKey(), "RSA PRIVATE KEY"),
+                _ => throw new NotImplementedException()
+            };
+        }
+
         public static void ManagedImportSubjectPublicKeyInfo(this RSA rsa, ReadOnlyMemory<byte> publicSubjectKeyInfoBytes)
         {
             AsnReader reader = new AsnReader(publicSubjectKeyInfoBytes, AsnEncodingRules.DER);
@@ -45,6 +55,16 @@ namespace PkcsExtensions.Blazor.Security
             privateKeyInfo.Write(writer);
 
             return writer.Encode();
+        }
+
+        public static byte[] ManagedExportSubjectPublicKeyInfo(this RSA rsa, AsnFormat format)
+        {
+            return format switch
+            {
+                AsnFormat.Der => rsa.ManagedExportSubjectPublicKeyInfo(),
+                AsnFormat.Pem => PemFormater.ToPemBytes(rsa.ManagedExportSubjectPublicKeyInfo(), "PUBLIC KEY"),
+                _ => throw new NotImplementedException()
+            };
         }
     }
 }
