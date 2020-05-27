@@ -99,7 +99,7 @@ namespace PkcsExtensions.Blazor.Tests.Security
         {
             byte[] hash = HexConvertor.GetBytes("540fb8eb12db464515e45d587376526532e0472f3bbd242a8f86c16c51614ce0");
             byte[] signature = signer.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-            bool isValid = signer.VerifyHash(hash, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            bool isValid = verifier.VerifyHash(hash, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
             Assert.IsTrue(isValid, "Signer and verifier has diferent keys.");
         }
 
