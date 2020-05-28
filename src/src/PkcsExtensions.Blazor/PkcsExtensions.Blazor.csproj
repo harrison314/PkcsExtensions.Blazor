@@ -16,6 +16,7 @@
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
+    <PackageIcon>NugetIcon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,5 +39,12 @@
       <Pack>false</Pack>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\img\NugetIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
