@@ -30,11 +30,11 @@ namespace PkcsExtensions.Blazor.WebCrypto
 
             JsonWebKeyProxy privateKeyProxy = new JsonWebKeyProxy(privateKey);
             JsonWebKeyProxy otherPublicKeyProxy = new JsonWebKeyProxy(otherPublicKey);
-            int lenght = this.ToDhmLen(otherPublicKey);
+            int length = this.ToDhmLength(otherPublicKey);
 
             string sharedSeecritBase64 = await this.jsRuntime.InvokeAsync<string>("PkcsExtensionsBlazor_sharedDhmSecret",
                 cancellationToken: cancellationToken,
-                args: new object[] { privateKeyProxy, otherPublicKeyProxy, lenght });
+                args: new object[] { privateKeyProxy, otherPublicKeyProxy, length });
 
             return Convert.FromBase64String(sharedSeecritBase64);
         }
@@ -46,11 +46,11 @@ namespace PkcsExtensions.Blazor.WebCrypto
             if (!string.Equals("EC", otherPublicKey.Kty, StringComparison.Ordinal)) throw new ArgumentException("otherPublicKey must by EC key");
 
             JsonWebKeyProxy otherPublicKeyProxy = new JsonWebKeyProxy(otherPublicKey);
-            int lenght = this.ToDhmLen(otherPublicKey);
+            int length = this.ToDhmLength(otherPublicKey);
 
             Dictionary<string, string> jwkFields = await this.jsRuntime.InvokeAsync<Dictionary<string, string>>("PkcsExtensionsBlazor_sharedEphemeralDhmSecret",
                 cancellationToken: cancellationToken,
-                args: new object[] { otherPublicKeyProxy, lenght });
+                args: new object[] { otherPublicKeyProxy, length });
 
             return new EcdhEphemeralBundle()
             {
@@ -59,7 +59,7 @@ namespace PkcsExtensions.Blazor.WebCrypto
             };
         }
 
-        public int ToDhmLen(JsonWebKey jsonWebKey)
+        private int ToDhmLength(JsonWebKey jsonWebKey)
         {
             return jsonWebKey.CurveName switch
             {
