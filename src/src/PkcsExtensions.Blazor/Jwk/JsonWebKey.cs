@@ -292,7 +292,7 @@ namespace PkcsExtensions.Blazor.Jwk
                     }
                 }
             }
-            throw new ArgumentException(string.Format("Value of \"{0}\" must be non-zero.", name));
+            throw new ArgumentException($"Value of \"{name}\" must be non-zero.");
         }
 
         private static byte[] RemoveLeadingZeros(byte[] value)
@@ -308,8 +308,10 @@ namespace PkcsExtensions.Blazor.Jwk
                         return array;
                     }
                 }
-                return new byte[1];
+
+                return new byte[1] { 0 };
             }
+
             return value;
         }
 
@@ -332,14 +334,16 @@ namespace PkcsExtensions.Blazor.Jwk
                 {
                     if (value[i] != 0)
                     {
-                        throw new ArgumentException(string.Format("Invalid length of \"{0}\": expected at most {1} bytes, found {2} bytes.", name, requiredLength, value.Length - i));
+                        throw new ArgumentException($"Invalid length of \"{name}\": expected at most {requiredLength} bytes, found {value.Length - i} bytes.");
                     }
                 }
+
                 byte[] array2 = new byte[requiredLength];
                 Array.Copy(value, value.Length - requiredLength, array2, 0, requiredLength);
                 return array2;
             }
-            throw new ArgumentException(string.Format("Value of \"{0}\" is null or empty.", name));
+
+            throw new ArgumentException($"Value of \"{name}\" is null or empty.");
         }
 
         public override string ToString()

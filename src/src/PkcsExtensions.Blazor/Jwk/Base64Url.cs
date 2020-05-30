@@ -29,8 +29,8 @@ namespace PkcsExtensions.Blazor.Jwk
             if (base64Url == null) throw new ArgumentNullException(nameof(base64Url));
 
             StringBuilder sb = new StringBuilder(base64Url);
-            sb.Replace("_", "/");
-            sb.Replace("-", "+");
+            sb.Replace('_', '/');
+            sb.Replace('-', '+');
 
             switch (sb.Length % 4)
             {
