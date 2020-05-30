@@ -36,7 +36,7 @@ namespace PkcsExtensions.Blazor.ASN1
 
         public SubjectPublicKeyInfo(RSAParameters parameters)
         {
-            this.Algorithm = new AlgorithmIdentifier("1.2.840.113549.1.1.1");
+            this.Algorithm = new AlgorithmIdentifier(Oids.RsaEncryption);
             this.PublicKey = PkcsRsaConvertor.RsaParamsToPublicKey(parameters);
         }
 

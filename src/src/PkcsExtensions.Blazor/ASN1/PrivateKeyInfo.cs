@@ -47,7 +47,7 @@ namespace PkcsExtensions.Blazor.ASN1
 
         public PrivateKeyInfo(RSAParameters parameters)
         {
-            this.Algorithm = new AlgorithmIdentifier("1.2.840.113549.1.1.1");
+            this.Algorithm = new AlgorithmIdentifier(Oids.RsaEncryption);
             this.PrivateKey = PkcsRsaConvertor.RsaParamsToPrivateKey(parameters);
         }
 
@@ -60,6 +60,7 @@ namespace PkcsExtensions.Blazor.ASN1
             this.Algorithm.Write(asnWriter);
             asnWriter.WriteOctetString(this.PrivateKey.Span);
 
+            // Specification vs. reality
             //asnWriter.WriteNull(new Asn1Tag(TagClass.ContextSpecific, 0, true));
 
             asnWriter.PopSequence();

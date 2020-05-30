@@ -235,7 +235,7 @@ namespace PkcsExtensions.Blazor.Jwk
             }
             JsonWebKey.VerifyNonZero("N", this.N);
             JsonWebKey.VerifyNonZero("E", this.E);
-            RSAParameters rSAParameters = default(RSAParameters);
+            RSAParameters rSAParameters = default;
             rSAParameters.Modulus = JsonWebKey.RemoveLeadingZeros(this.N);
             rSAParameters.Exponent = JsonWebKey.ForceLength("E", this.E, 4);
             if (includePrivateParameters)
