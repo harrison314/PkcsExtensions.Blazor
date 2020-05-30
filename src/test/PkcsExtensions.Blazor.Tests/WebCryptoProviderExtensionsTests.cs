@@ -26,5 +26,30 @@ namespace PkcsExtensions.Blazor.Tests
 
             generator.NextBytes(new byte[50]);
         }
+
+        [TestMethod]
+        public async Task GetNonZeroBytes()
+        {
+            byte[] result = new byte[20];
+            Array.Fill<byte>(result, 42);
+            result[3] = result[7] = result[13] = result[17] = 0;
+
+            Mock<IWebCryptoProvider> providerMock = new Mock<IWebCryptoProvider>(MockBehavior.Strict);
+            providerMock.Setup(t => t.GetRandomBytes(20, default))
+                .ReturnsAsync(result)
+                .Verifiable();
+
+            providerMock.Setup(t => t.GetRandomBytes(4, default))
+                .ReturnsAsync(new byte[] { 87, 0, 76, 7 })
+                .Verifiable();
+
+            providerMock.Setup(t => t.GetRandomBytes(1, default))
+                .ReturnsAsync(new byte[] { 8 })
+                .Verifiable();
+
+            byte[] nonZeroBytes = await providerMock.Object.GetNonZeroBytes(20);
+            Assert.IsNotNull(result);
+            CollectionAssert.DoesNotContain(nonZeroBytes,(byte) 0);
+        }
     }
 }

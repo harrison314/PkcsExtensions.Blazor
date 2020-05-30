@@ -20,5 +20,49 @@ namespace PkcsExtensions.Blazor
 
             return generator;
         }
+
+        public static async Task<byte[]> GetNonZeroBytes(this IWebCryptoProvider webCryptoProvider, int count, CancellationToken cancellationToken = default)
+        {
+            if (count < 0) throw new ArgumentOutOfRangeException(nameof(count));
+
+            if (count == 0)
+            {
+                return Array.Empty<byte>();
+            }
+
+            byte[] buffer = await webCryptoProvider.GetRandomBytes(count, cancellationToken);
+            for (; ; )
+            {
+                int zeroCount = 0;
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    if (buffer[i] == 0)
+                    {
+                        zeroCount++;
+                    }
+                }
+
+                if (zeroCount == 0)
+                {
+                    break;
+                }
+
+                else
+                {
+                    byte[] additionalSource = await webCryptoProvider.GetRandomBytes(zeroCount, cancellationToken);
+                    int j = 0;
+                    for (int i = 0; i < buffer.Length; i++)
+                    {
+                        if (buffer[i] == 0)
+                        {
+                            buffer[i] = additionalSource[j];
+                            j++;
+                        }
+                    }
+                }
+            }
+
+            return buffer;
+        }
     }
 }
