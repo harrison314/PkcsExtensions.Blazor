@@ -10,6 +10,7 @@ Examples using WebCrypto interop.
 </div>
 <div>
     <button @onclick="GenerateRandom">Generate</button>
+    <button @onclick="GenerateNonZeroBytes">Generate non-zero bytes</button>
 </div>
 
 @code {
@@ -19,6 +20,12 @@ Examples using WebCrypto interop.
     private async Task GenerateRandom()
     {
         byte[] data = await this.wcProvider.GetRandomBytes(32);
+        this.dataAsBase64 = Convert.ToBase64String(data);
+    }
+
+    private async Task GenerateNonZeroBytes()
+    {
+        byte[] data = await this.wcProvider.GetNonZeroBytes(32);
         this.dataAsBase64 = Convert.ToBase64String(data);
     }
 }
