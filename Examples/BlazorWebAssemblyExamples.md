@@ -44,7 +44,7 @@ Examples using WebCrypto interop.
     private async Task GenerateRsa()
     {
         using RSA rsaKey = await wcProvider.GenerateRsaKeyPair(2048);
-        this.data = PemFormater.ToPem(rsaKey.ManagedExportSubjectPublicKeyInfo(), "PUBLIC KEY");
+        this.data = Encoding.ASCII.GetString(rsaKey.ManagedExportSubjectPublicKeyInfo(AsnFormat.Pem));
     }
 }
 ```
