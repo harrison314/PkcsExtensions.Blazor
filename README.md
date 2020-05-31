@@ -17,6 +17,10 @@ Add to _index.html_:
 ```html
 <script src="_content/PkcsExtensions.Blazor/WebCryptoInterop.js"></script>
 ```
+or minifiy version:
+```html
+<script src="_content/PkcsExtensions.Blazor/WebCryptoInterop.min.js"></script>
+```
 
 And register services in _Main_ method:
 ```cs

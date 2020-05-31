@@ -1,0 +1,14 @@
+[
+	{
+		"outputFileName": "wwwroot/WebCryptoInterop.min.js",
+		"inputFiles": [
+			"wwwroot/WebCryptoInterop.js"
+		],
+		"minify": {
+			"enabled": true,
+			"renameLocals": true,
+			"preserveImportantComments": false
+		},
+		"sourceMap": false
+	}
+]
