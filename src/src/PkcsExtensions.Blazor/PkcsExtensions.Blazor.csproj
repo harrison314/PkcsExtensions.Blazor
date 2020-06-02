@@ -17,6 +17,7 @@
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <PackageIcon>NugetIcon.png</PackageIcon>
+    <PackageReleaseNotes>1.1.0 - Add PEM/DER format to RSAExtensions. Add IWebCryptoProvider.GetNonZeroBytes extension method. Add javascript minification.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
