@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.0.0.0</Version>
+    <Version>1.1.0.0</Version>
     <RazorLangVersion>3.0</RazorLangVersion>
     <Title>PKCS Extensions Blazor</Title>
     <Authors>harrison314</Authors>
@@ -24,7 +24,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="PkcsExtensions" Version="1.0.0" />
+    <PackageReference Include="PkcsExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.0" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.2">
