@@ -15,6 +15,12 @@ namespace PkcsExtensions.Blazor.Security
         private readonly CertificationRequestInfo certificationRequestInfo;
         private readonly RsaCertificateRequestSigner signer;
 
+        public HashAlgorithmName SignatureHash
+        {
+            get;
+            set;
+        }
+
         public RsaCertificateRequest(X509Name x509Name, RSA rsa, IEnumerable<IAsn1Node> attributes = null)
             : this(x509Name, rsa, (hash, hashName) => new ValueTask<byte[]>(rsa.SignHash(hash, hashName, RSASignaturePadding.Pkcs1)), attributes)
         {
@@ -27,6 +33,7 @@ namespace PkcsExtensions.Blazor.Security
             if (rsa == null) throw new ArgumentNullException(nameof(rsa));
             if (signer == null) throw new ArgumentNullException(nameof(signer));
 
+            this.SignatureHash = HashAlgorithmName.SHA256;
             SubjectPublicKeyInfo subjectPublicKeyInfo = new SubjectPublicKeyInfo(rsa.ExportParameters(false));
             this.certificationRequestInfo = new CertificationRequestInfo(x509Name, subjectPublicKeyInfo, attributes);
             this.signer = signer;
@@ -34,13 +41,13 @@ namespace PkcsExtensions.Blazor.Security
 
         public async ValueTask<byte[]> Generate(AsnFormat format)
         {
-            byte[] sha256 = this.CreateSha256Hash();
+            byte[] sha256 = this.CreateHash();
 
             CertificationRequest request = new CertificationRequest();
 
             request.CertificationRequestInfo = this.certificationRequestInfo;
             request.Signature = await this.signer.Invoke(sha256, HashAlgorithmName.SHA256).ConfigureAwait(false);
-            request.SignatureAlgorithm = new AlgorithmIdentifier(Oids.SHA256WithRSAEncryption);
+            request.SignatureAlgorithm = new AlgorithmIdentifier(this.GetHashALgorithmRsaEncryptionOid());
 
             using AsnWriter asnWriter = new AsnWriter(AsnEncodingRules.DER);
             request.Write(asnWriter);
@@ -54,13 +61,33 @@ namespace PkcsExtensions.Blazor.Security
             };
         }
 
-        private byte[] CreateSha256Hash()
+        private byte[] CreateHash()
         {
             using AsnWriter asnWriter = new AsnWriter(AsnEncodingRules.DER);
             this.certificationRequestInfo.Write(asnWriter);
 
-            using SHA256 sha256 = SHA256.Create();
-            return sha256.ComputeHash(asnWriter.Encode());
+            using HashAlgorithm hashAlgorithm = HashAlgorithmConvertor.ToHashAlgorithm(this.SignatureHash);
+            return hashAlgorithm.ComputeHash(asnWriter.Encode());
+        }
+
+        private string GetHashALgorithmRsaEncryptionOid()
+        {
+            if (HashAlgorithmName.SHA256.Equals(this.SignatureHash))
+            {
+                return Oids.Sha256WithRsaEncryption;
+            }
+
+            if (HashAlgorithmName.SHA384.Equals(this.SignatureHash))
+            {
+                return Oids.Sha384WithRsaEncryption;
+            }
+
+            if (HashAlgorithmName.SHA512.Equals(this.SignatureHash))
+            {
+                return Oids.Sha512WithRsaEncryption;
+            }
+
+            throw new NotSupportedException($"Hash algorithm {this.SignatureHash} is not supported.");
         }
     }
 }
