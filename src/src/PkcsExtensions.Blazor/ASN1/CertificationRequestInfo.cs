@@ -50,7 +50,8 @@ namespace PkcsExtensions.Blazor.ASN1
             this.Name.Write(asnWriter);
             this.SubjectPKInfo.Write(asnWriter);
 
-            asnWriter.PushSetOf(new Asn1Tag(TagClass.ContextSpecific, 0, true));
+            Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 0, true);
+            asnWriter.PushSetOf(tag);
             if (this.Attributes != null)
             {
                 foreach (IAsn1Node attribute in this.Attributes)
@@ -58,7 +59,7 @@ namespace PkcsExtensions.Blazor.ASN1
                     attribute.Write(asnWriter);
                 }
             }
-            asnWriter.PopSetOf();
+            asnWriter.PopSetOf(tag);
 
             asnWriter.PopSequence();
         }

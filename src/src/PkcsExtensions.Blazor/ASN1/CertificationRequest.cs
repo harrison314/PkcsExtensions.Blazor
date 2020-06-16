@@ -31,11 +31,14 @@ namespace PkcsExtensions.Blazor.ASN1
         {
 
         }
+
         public void Write(AsnWriter asnWriter)
         {
+            asnWriter.PushSequence();
             this.CertificationRequestInfo.Write(asnWriter);
             this.SignatureAlgorithm.Write(asnWriter);
             asnWriter.WriteBitString(this.Signature.Span);
+            asnWriter.PopSequence();
         }
     }
 }
