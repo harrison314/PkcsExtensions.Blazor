@@ -4,6 +4,7 @@
  Add crypto and digital signature functionality for Blazor and light [WebCrypto](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) interop.
 
  ## Features
+
  - Namespace **PkcsExtensions.Blazor**:
    - `IWebCryptoProvider` - provide generate random numbers, generate RSA and ECDSA (as JsonWebKey) key pairs
    - `IEcWebCryptoProvider` - provide methods `GetSharedDhmSecret` for derive bytes using _Diffie Hellman Merkle_ and `GetSharedEphemeralDhmSecret` for ECIES scheme.
