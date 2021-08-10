@@ -1,60 +1,61 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.1.0.0</Version>
-    <RazorLangVersion>3.0</RazorLangVersion>
-    <Title>PKCS Extensions Blazor</Title>
-    <Authors>harrison314</Authors>
-    <Product>PkcsExtensions</Product>
-    <Copyright>harrison314</Copyright>
-    <PackageProjectUrl>https://github.com/harrison314/PkcsExtensions.Blazor</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/harrison314/PkcsExtensions.Blazor.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>PKI, PKCS, X509Certificate2, Blazor, BlazorWebAssembly, WebCrypto, RSA</PackageTags>
-    <Description>PKCS Extensions for Blazor WebAssembly, include light interop to WebCrypto.</Description>
-    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>$(Version)</FileVersion>
-    <PackageIcon>NugetIcon.png</PackageIcon>
-    <PackageReleaseNotes>1.1.0 - Add PEM/DER format to RSAExtensions. Add IWebCryptoProvider.GetNonZeroBytes extension method. Add javascript minification.</PackageReleaseNotes>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Version>1.2.0.0</Version>
+		<FileVersion>1.2.0.0-beta1</FileVersion>
+		<RazorLangVersion>3.0</RazorLangVersion>
+		<Title>PKCS Extensions Blazor</Title>
+		<Authors>harrison314</Authors>
+		<Product>PkcsExtensions</Product>
+		<Copyright>harrison314</Copyright>
+		<PackageProjectUrl>https://github.com/harrison314/PkcsExtensions.Blazor</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/harrison314/PkcsExtensions.Blazor.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>PKI, PKCS, X509Certificate2, Blazor, BlazorWebAssembly, WebCrypto, RSA</PackageTags>
+		<Description>PKCS Extensions for Blazor WebAssembly, include light interop to WebCrypto.</Description>
+		<PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<FileVersion>$(Version)</FileVersion>
+		<PackageIcon>NugetIcon.png</PackageIcon>
+		<PackageReleaseNotes>1.1.0 - Add PEM/DER format to RSAExtensions. Add IWebCryptoProvider.GetNonZeroBytes extension method. Add javascript minification.</PackageReleaseNotes>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="3.2.447">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="PkcsExtensions" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.0" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BuildBundlerMinifier" Version="3.2.447">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="PkcsExtensions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.0" />
+		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="tsconfig.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <Pack>false</Pack>
-    </Content>
+	<ItemGroup>
+		<Content Update="tsconfig.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<Pack>false</Pack>
+		</Content>
 
-    <Content Update="bundleconfig.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <Pack>false</Pack>
-    </Content>
+		<Content Update="bundleconfig.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<Pack>false</Pack>
+		</Content>
 
-    <Content Update="**/*.ts">
-      <Pack>false</Pack>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+		<Content Update="**/*.ts">
+			<Pack>false</Pack>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\..\img\NugetIcon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\..\img\NugetIcon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 </Project>

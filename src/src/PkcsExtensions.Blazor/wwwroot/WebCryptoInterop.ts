@@ -28,6 +28,9 @@ namespace PkcsExtensionsBlazor {
         return window.btoa(uint8Array.reduce((data, byte) => data + String.fromCharCode(byte), ''));
     }
 
+    function fromBase64(base64:string): Uint8Array {
+        return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+    }
 
     function unpromise<T extends object>(inObj: T): PromiseLike<Unpromised<T>> {
         let acc = Promise.resolve(0)
@@ -65,6 +68,25 @@ namespace PkcsExtensionsBlazor {
         }, true, ['encrypt', 'decrypt'])
             .then(t => crypto.subtle.exportKey('pkcs8', t.privateKey))
             .then(buffer => toBase64(new Uint8Array(buffer)));
+    };
+
+    const pbkdf2 = function (hashFunction:string, password: string, salt: string, iterations: number, outLenght: number) {
+        let algorithm = {
+            name: 'PBKDF2',
+            salt: fromBase64(salt),
+            iterations: iterations,
+            hash: hashFunction
+        };
+
+        return crypto.subtle.importKey('raw', fromBase64(password), { name: 'PBKDF2' }, false, ['deriveBits', 'deriveKey'])
+            .then(key => crypto.subtle.deriveBits(algorithm, key, outLenght))
+            .then(bytes => toBase64(new Uint8Array(bytes)));
+    }
+
+    const hmac = function (hashFunction: string, key: string, data: string) {
+        return crypto.subtle.importKey('raw', fromBase64(key), { name: 'HMAC', hash: hashFunction }, false, ['sign'])
+            .then(key => crypto.subtle.sign('HMAC', key, fromBase64(data)))
+            .then(bytes => toBase64(new Uint8Array(bytes)));
     };
 
     const mapEcJwk = function (jwk: JsonWebKey): EcDsaPrivateKeyData {
@@ -168,6 +190,8 @@ namespace PkcsExtensionsBlazor {
         window['PkcsExtensionsBlazor_generateKeyEcdsa'] = generateKeyEcdsa;
         window['PkcsExtensionsBlazor_sharedEphemeralDhmSecret'] = sharedEphemeralDhmSecret;
         window['PkcsExtensionsBlazor_sharedDhmSecret'] = sharedDhmSecret;
+        window['PkcsExtensionsBlazor_pbkdf2'] = pbkdf2;
+        window['PkcsExtensionsBlazor_hmac'] = hmac;
     }
 }
 

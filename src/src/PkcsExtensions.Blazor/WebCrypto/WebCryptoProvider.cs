@@ -71,6 +71,31 @@ namespace PkcsExtensions.Blazor.WebCrypto
             return this.ConvertToWebKey(jwkFields);
         }
 
+        public async ValueTask<byte[]> DeriveBytesPbkdf2(byte[] password, byte[] salt, int iterations, WebCryptoHashAlgorithm hashAlgorithm, int ouputSize, CancellationToken cancellationToken = default)
+        {
+            if (password == null) throw new ArgumentNullException(nameof(password));
+            if (salt == null) throw new ArgumentNullException(nameof(salt));
+
+            if (salt.Length == 0) throw new ArgumentOutOfRangeException("salt size is less than zero");
+
+            string hash = this.TraslnalteToHashName(hashAlgorithm);
+            return await this.jsRuntime.InvokeAsync<byte[]>("PkcsExtensionsBlazor_generateKeyEcdsa",
+                 cancellationToken: cancellationToken,
+                 args: new object[] { hash, password, salt, iterations, ouputSize * 8 });
+        }
+
+        public async ValueTask<byte[]> ComputeHmac(WebCryptoHashAlgorithm hashAlgorithm, byte[] key, byte[] data, CancellationToken cancellationToken = default)
+        {
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (data == null) throw new ArgumentNullException(nameof(data));
+
+
+            string hash = this.TraslnalteToHashName(hashAlgorithm);
+            return await this.jsRuntime.InvokeAsync<byte[]>("PkcsExtensionsBlazor_hmac",
+                 cancellationToken: cancellationToken,
+                 args: new object[] { hash, key, data });
+        }
+
         private string TranslateToCurveName(WebCryptoCurveName curveName)
         {
             return curveName switch
@@ -78,6 +103,18 @@ namespace PkcsExtensions.Blazor.WebCrypto
                 WebCryptoCurveName.NistP256 => "P-256",
                 WebCryptoCurveName.NistP384 => "P-384",
                 WebCryptoCurveName.NistP521 => "P-521",
+                _ => throw new NotImplementedException()
+            };
+        }
+
+        private string TraslnalteToHashName(WebCryptoHashAlgorithm hashAlgorithm)
+        {
+            return hashAlgorithm switch
+            {
+                WebCryptoHashAlgorithm.SHA1 => "SHA-1",
+                WebCryptoHashAlgorithm.SHA256 => "SHA-256",
+                WebCryptoHashAlgorithm.SHA384 => "SHA-384",
+                WebCryptoHashAlgorithm.SHA512 => "SHA-512",
                 _ => throw new NotImplementedException()
             };
         }

@@ -16,5 +16,9 @@ namespace PkcsExtensions.Blazor
         ValueTask<RSA> GenerateRsaKeyPair(int keySize, CancellationToken cancellationToken = default);
 
         ValueTask<JsonWebKey> GenerateECDsaJwkKeyPair(WebCryptoCurveName curveName, CancellationToken cancellationToken = default);
+
+        ValueTask<byte[]> DeriveBytesPbkdf2(byte[] password, byte[] salt, int iterations, WebCryptoHashAlgorithm hashAlgorithm, int ouputSize, CancellationToken cancellationToken = default);
+
+        ValueTask<byte[]> ComputeHmac(WebCryptoHashAlgorithm hashAlgorithm, byte[] key, byte[] data, CancellationToken cancellationToken = default);
     }
 }

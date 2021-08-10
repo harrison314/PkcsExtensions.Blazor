@@ -14,6 +14,9 @@ var PkcsExtensionsBlazor;
     function toBase64(uint8Array) {
         return window.btoa(uint8Array.reduce(function (data, byte) { return data + String.fromCharCode(byte); }, ''));
     }
+    function fromBase64(base64) {
+        return Uint8Array.from(atob(base64), function (c) { return c.charCodeAt(0); });
+    }
     function unpromise(inObj) {
         var acc = Promise.resolve(0);
         var outObj = {};
@@ -46,6 +49,22 @@ var PkcsExtensionsBlazor;
         }, true, ['encrypt', 'decrypt'])
             .then(function (t) { return crypto.subtle.exportKey('pkcs8', t.privateKey); })
             .then(function (buffer) { return toBase64(new Uint8Array(buffer)); });
+    };
+    var pbkdf2 = function (hashFunction, password, salt, iterations, outLenght) {
+        var algorithm = {
+            name: 'PBKDF2',
+            salt: fromBase64(salt),
+            iterations: iterations,
+            hash: hashFunction
+        };
+        return crypto.subtle.importKey('raw', fromBase64(password), { name: 'PBKDF2' }, false, ['deriveBits', 'deriveKey'])
+            .then(function (key) { return crypto.subtle.deriveBits(algorithm, key, outLenght); })
+            .then(function (bytes) { return toBase64(new Uint8Array(bytes)); });
+    };
+    var hmac = function (hashFunction, key, data) {
+        return crypto.subtle.importKey('raw', fromBase64(key), { name: 'HMAC', hash: hashFunction }, false, ['sign'])
+            .then(function (key) { return crypto.subtle.sign('HMAC', key, fromBase64(data)); })
+            .then(function (bytes) { return toBase64(new Uint8Array(bytes)); });
     };
     var mapEcJwk = function (jwk) {
         return {
@@ -133,6 +152,8 @@ var PkcsExtensionsBlazor;
         window['PkcsExtensionsBlazor_generateKeyEcdsa'] = generateKeyEcdsa;
         window['PkcsExtensionsBlazor_sharedEphemeralDhmSecret'] = sharedEphemeralDhmSecret;
         window['PkcsExtensionsBlazor_sharedDhmSecret'] = sharedDhmSecret;
+        window['PkcsExtensionsBlazor_pbkdf2'] = pbkdf2;
+        window['PkcsExtensionsBlazor_hmac'] = hmac;
     }
     PkcsExtensionsBlazor.Load = Load;
 })(PkcsExtensionsBlazor || (PkcsExtensionsBlazor = {}));
